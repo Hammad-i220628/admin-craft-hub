@@ -1,6 +1,12 @@
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { Users, ShoppingBag, DollarSign, Package } from "lucide-react";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { Area, AreaChart, XAxis, YAxis } from "recharts";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -34,6 +40,39 @@ export const Dashboard = () => {
     },
   ];
 
+  const salesData = [
+    { month: "Jan", sales: 4000 },
+    { month: "Feb", sales: 3000 },
+    { month: "Mar", sales: 5000 },
+    { month: "Apr", sales: 4500 },
+    { month: "May", sales: 6000 },
+    { month: "Jun", sales: 5500 },
+  ];
+
+  const dealsData = [
+    {
+      id: 1,
+      product: "Smartphone X",
+      sales: 245,
+      revenue: "$24,500",
+      growth: "+12%",
+    },
+    {
+      id: 2,
+      product: "Laptop Pro",
+      sales: 190,
+      revenue: "$57,000",
+      growth: "+8%",
+    },
+    {
+      id: 3,
+      product: "Wireless Earbuds",
+      sales: 320,
+      revenue: "$16,000",
+      growth: "+15%",
+    },
+  ];
+
   return (
     <div className="space-y-8">
       <h1 className="text-3xl font-bold">Dashboard</h1>
@@ -60,11 +99,61 @@ export const Dashboard = () => {
         ))}
       </div>
 
-      {/* Placeholder for charts - we'll implement these later */}
       <Card className="p-6">
         <h2 className="text-xl font-semibold mb-4">Sales Overview</h2>
-        <div className="h-[400px] flex items-center justify-center text-gray-500">
-          Sales chart will be implemented here
+        <div className="h-[400px]">
+          <ChartContainer
+            className="h-full"
+            config={{
+              sales: {
+                theme: {
+                  light: "#3b82f6",
+                  dark: "#60a5fa",
+                },
+              },
+            }}
+          >
+            <AreaChart data={salesData}>
+              <XAxis dataKey="month" />
+              <YAxis />
+              <ChartTooltip>
+                <ChartTooltipContent />
+              </ChartTooltip>
+              <Area
+                type="monotone"
+                dataKey="sales"
+                stroke="#3b82f6"
+                fill="#3b82f6"
+                fillOpacity={0.2}
+              />
+            </AreaChart>
+          </ChartContainer>
+        </div>
+      </Card>
+
+      <Card className="p-6">
+        <h2 className="text-xl font-semibold mb-4">Deals Details</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b">
+                <th className="text-left py-3">Product</th>
+                <th className="text-left py-3">Sales</th>
+                <th className="text-left py-3">Revenue</th>
+                <th className="text-left py-3">Growth</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dealsData.map((deal) => (
+                <tr key={deal.id} className="border-b hover:bg-gray-50">
+                  <td className="py-3">{deal.product}</td>
+                  <td className="py-3">{deal.sales}</td>
+                  <td className="py-3">{deal.revenue}</td>
+                  <td className="py-3 text-green-500">{deal.growth}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </Card>
     </div>

@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Search, Plus, Minus, Trash2 } from "lucide-react";
 
-// Sample stock data
 const stockData = [
   {
     id: 1,
@@ -14,6 +13,7 @@ const stockData = [
     quantity: 150,
     minStock: 50,
     price: 149.99,
+    image: "https://images.unsplash.com/photo-1535268647677-300dbf3d78d1",
   },
   {
     id: 2,
@@ -22,6 +22,7 @@ const stockData = [
     quantity: 30,
     minStock: 40,
     price: 499.99,
+    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
   },
   {
     id: 3,
@@ -30,6 +31,7 @@ const stockData = [
     quantity: 200,
     minStock: 100,
     price: 66.66,
+    image: "https://images.unsplash.com/photo-1535268647677-300dbf3d78d1",
   },
 ];
 
@@ -73,12 +75,19 @@ export const Stock = () => {
         {filteredInventory.map((item) => (
           <Card key={item.id} className="p-4">
             <div className="flex justify-between items-center">
-              <div>
-                <h3 className="font-semibold">{item.name}</h3>
-                <p className="text-sm text-gray-600">SKU: {item.sku}</p>
-                <p className="text-sm text-gray-600">
-                  Price: ${item.price.toFixed(2)}
-                </p>
+              <div className="flex space-x-4">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-16 h-16 object-cover rounded-lg"
+                />
+                <div>
+                  <h3 className="font-semibold">{item.name}</h3>
+                  <p className="text-sm text-gray-600">SKU: {item.sku}</p>
+                  <p className="text-sm text-gray-600">
+                    Price: ${item.price.toFixed(2)}
+                  </p>
+                </div>
               </div>
               <div className="flex items-center space-x-4">
                 <Badge

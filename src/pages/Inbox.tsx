@@ -4,7 +4,6 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Search, Mail, Star, Trash2 } from "lucide-react";
 
-// Sample inbox data
 const inboxData = [
   {
     id: 1,
@@ -28,6 +27,30 @@ const inboxData = [
     subject: "New Campaign Proposal",
     message: "Review the new marketing campaign for Q2.",
     date: "2024-03-08",
+    read: true,
+  },
+  {
+    id: 4,
+    from: "Logistics Partner",
+    subject: "Shipping Updates",
+    message: "Important updates regarding shipping rates for Q2.",
+    date: "2024-03-07",
+    read: false,
+  },
+  {
+    id: 5,
+    from: "Tech Support",
+    subject: "System Maintenance Notice",
+    message: "Scheduled maintenance for the inventory system this weekend.",
+    date: "2024-03-06",
+    read: true,
+  },
+  {
+    id: 6,
+    from: "Finance Department",
+    subject: "Monthly Revenue Report",
+    message: "Attached is the detailed revenue report for last month.",
+    date: "2024-03-05",
     read: true,
   },
 ];
