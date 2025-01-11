@@ -73,6 +73,19 @@ export const Dashboard = () => {
     },
   ];
 
+  const additionalMenuItems = [
+    { title: "Pricing", path: "/pricing" },
+    { title: "Category", path: "/category" },
+    { title: "To-Do", path: "/todo" },
+    { title: "Contact", path: "/contact" },
+    { title: "Invoice", path: "/invoice" },
+    { title: "UI Elements", path: "/ui-elements" },
+    { title: "Teams", path: "/teams" },
+    { title: "Tables", path: "/tables" },
+    { title: "Settings", path: "/settings" },
+    { title: "Logout", path: "/logout" },
+  ];
+
   return (
     <div className="space-y-8">
       <h1 className="text-3xl font-bold">Dashboard</h1>
@@ -114,6 +127,12 @@ export const Dashboard = () => {
             }}
           >
             <AreaChart data={salesData}>
+              <defs>
+                <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8}/>
+                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                </linearGradient>
+              </defs>
               <XAxis dataKey="month" />
               <YAxis />
               <ChartTooltip>
@@ -123,8 +142,9 @@ export const Dashboard = () => {
                 type="monotone"
                 dataKey="sales"
                 stroke="#3b82f6"
-                fill="#3b82f6"
-                fillOpacity={0.2}
+                fillOpacity={1}
+                fill="url(#colorSales)"
+                strokeWidth={2}
               />
             </AreaChart>
           </ChartContainer>
@@ -156,6 +176,18 @@ export const Dashboard = () => {
           </table>
         </div>
       </Card>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        {additionalMenuItems.map((item) => (
+          <Card
+            key={item.title}
+            className="p-4 cursor-pointer hover:bg-gray-50 transition-colors"
+            onClick={() => navigate(item.path)}
+          >
+            <p className="text-center font-medium">{item.title}</p>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 };
